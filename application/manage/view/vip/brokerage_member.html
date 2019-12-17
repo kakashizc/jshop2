@@ -1,0 +1,68 @@
+<style>
+    #container{
+        padding: 0px;
+        border-radius:0px;
+        border-width:0px;
+    }
+    .layui-form-label{
+        float: left;
+        display: block;
+        padding: 9px 15px;
+        width: 380px;
+        font-weight: 400;
+        line-height: 20px;
+        text-align: right;
+    }
+</style>
+<form class="layui-form seller-alone-form" action="" method="post">
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label"><i class="required-color">*</i>普通用户返佣金额升级的人数：</label>
+        <div class="layui-input-inline seller-inline-5">
+            <input type="number" name="normal_num" value="{$info.normal_num}" required  lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label"><i class="required-color">*</i>会员用户返佣金额升级的人数：</label>
+        <div class="layui-input-inline seller-inline-5">
+            <input type="number" name="member_num" value="{$info.member_num}" required  lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label"><i class="required-color">*</i>合伙人用户返佣金额升级的人数：</label>
+        <div class="layui-input-inline seller-inline-5">
+            <input type="number" name="partner_num" value="{$info.partner_num}" required  lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="button" class="layui-btn" lay-submit lay-filter="edit_article">保存</button>
+            <button onclick="javascript:history.back(-1)" type="reset" class="layui-btn layui-btn-primary">返回</button>
+        </div>
+    </div>
+
+</form>
+
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+        //监听提交
+        form.on('submit(edit_article)', function(data){
+            JsPost("{:url('vip/edit_member')}", data.field, function(res){
+                if(res.status){
+                    layer.msg(res.msg)
+                }else{
+                    layer.msg(res.msg);
+                }
+            })
+        });
+    });
+</script>
+<script type="text/javascript">
+    var ue = UE.getEditor('container');
+</script>

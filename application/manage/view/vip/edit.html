@@ -1,0 +1,68 @@
+<style>
+    #container{
+        padding: 0px;
+        border-radius:0px;
+        border-width:0px;
+    }
+</style>
+<form class="layui-form seller-alone-form" action="" method="post">
+
+    <input type="hidden" name="id" value="{$info.id}">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label"><i class="required-color">*</i>会员类型：</label>
+        <div class="layui-input-inline seller-inline-5">
+            <select name="check" id="">
+
+                <option value="{$info.check}"  <?php if($info['check'] == 3){?> selected="selected"  <?php }?> >合伙人</option>
+                <option value="{$info.check}"  <?php if($info['check'] == 2){?> selected="selected"  <?php }?> >会员</option>
+
+            </select>
+        </div>
+    </div>
+
+    <!-- <div class="layui-form-item">
+        <label class="layui-form-label"><i class="required-color">*</i>佣金比例：</label>
+        <div class="layui-input-inline seller-inlines-5">
+            <input type="text" name="percentage" value="{$info.percentage}" required  lay-verify="required"  autocomplete="off" class="layui-input">
+        </div>
+    </div> -->
+
+    <div class="layui-form-item">
+        <label class="layui-form-label"><i class="required-color">*</i>购买商品的折扣：</label>
+        <div class="layui-input-inline seller-inline-5">
+            <input type="text" name="discount" value="{$info.discount}" required  lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+
+            <button type="button" class="layui-btn" lay-submit lay-filter="edit_article">保存</button>
+            <button onclick="javascript:history.back(-1)" type="reset" class="layui-btn layui-btn-primary">返回</button>
+        </div>
+    </div>
+</form>
+
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+        //监听提交
+        form.on('submit(edit_article)', function(data){
+            JsPost("{:url('vip/edit')}", data.field, function(res){
+                if(res.status){
+                    layer.msg(res.msg, {time:1300},function(){
+                        window.location.href = "{:url('vip/index')}";
+                    });
+                }else{
+                    layer.msg(res.msg);
+                }
+            })
+        });
+    });
+</script>
+<script type="text/javascript">
+    var ue = UE.getEditor('container');
+</script>

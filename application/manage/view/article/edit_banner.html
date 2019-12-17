@@ -1,0 +1,54 @@
+<style>
+    #container{
+        padding: 0px;
+        border-radius:0px;
+        border-width:0px;
+    }
+</style>
+<form class="layui-form seller-alone-form" action="" method="post">
+
+    <input type="hidden" name="banner_id" value="{$banner_id}">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label"><i class="required-color">*</i>选择商品：</label>
+        <div class="layui-input-inline seller-inline-5">
+            <select name="gid" id="goods_lower_id" lay-filter="goods_lower_id">
+                <option value="0">请选择商品</option>
+                {volist name='goods' id='k'}
+                    <option value="{$k.id}" <?php  if($k['id'] == $id ){ ?>  selected='selected' <?php }?> >{$k.name}</option>
+                {/volist}
+            </select>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            {:jshopToken()}
+            <button type="button" class="layui-btn" lay-submit lay-filter="edit_article">保存</button>
+            <button onclick="javascript:history.back(-1)" type="reset" class="layui-btn layui-btn-primary">返回</button>
+        </div>
+    </div>
+</form>
+
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+        //监听提交
+        form.on('submit(edit_article)', function(data){
+            JsPost("{:url('Article/do_edit_banner')}", data.field, function(res){
+                if(res.status){
+                    layer.msg(res.msg, {time:1300},function(){
+                        window.location.href = "{:url('Article/index')}";
+                    });
+                }else{
+                    layer.msg(res.msg);
+                }
+            })
+        });
+    });
+</script>
+<script type="text/javascript">
+    var ue = UE.getEditor('container');
+</script>
