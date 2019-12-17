@@ -23,6 +23,6 @@ return [
     'view_filter'  => [],
     // 日志写入
     'log_write'    => [],
-    // 应用结束
+    // 应用结束123
     'app_end'      => [],
 ];
